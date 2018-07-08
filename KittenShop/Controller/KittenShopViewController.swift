@@ -8,35 +8,57 @@
 
 import UIKit
 
-class KittenShopViewController: UIViewController {
+class KittenShopViewController: UIViewController, KittenShopDelegate {
+    
 
     //MARK: - Entities
-    var kittenViewModels: [KittenViewModel] = []
-    //let kittenView = KittenView(frame: view.frame)
+    //private var kittenViewModels: [KittenViewModel] = []
+    private let kittensViewModel = KittenShopViewModel(rate: 0.5)
     
-    @IBOutlet weak var kittenView: UIView!
+    @IBOutlet weak var kitView: KittenView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchData()
-        
-        kittenViewModels.first?.configure(kittenView)
-        
-        view.addSubview(kittenView)
+        //fetchData()
+        kittensViewModel.configure(kitView)
+        kittensViewModel.delegate = self
     }
     
-    func fetchData() {
-        for kitten in KittensDatabase.testData() {
-            kittenViewModels.append(KittenViewModel(kitten: kitten))
+//    func fetchData() {
+//        for kitten in KittensDatabase.testData() {
+//            kittenViewModels.append(KittenViewModel(kitten: kitten))
+//        }
+//    }
+//
+//    @IBAction func handeSwipe() {
+//        print("swiped")
+//        if kittenViewModels.count > 1 {
+//            kittenViewModels.removeFirst()
+//            kittenViewModels.first?.configure(kitView)
+//        } else {
+//            kittenViewModels.removeAll()
+//            fetchData()
+//            kittenViewModels.first?.configure(kitView)
+//        }
+//    }
+    
+    @IBAction func swiped(_ sender: UISwipeGestureRecognizer) {
+        switch sender.direction {
+        case .right:
+            kittensViewModel.swipeRight()
+        case .left:
+            kittensViewModel.swipeLeft()
+        default:
+            break
         }
+        
     }
     
-    @IBAction func handeSwipe() {
-        if kittenViewModels.isEmpty {
-            fetchData()
-            
-        }
+    //MARK: - Delegate methods
+    func currentKittenChanged() {
+        print("kitten changed")
+        kittensViewModel.configure(kitView)
     }
 }
 

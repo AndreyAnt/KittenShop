@@ -1,33 +1,43 @@
 //
-//  KittenViewModel.swift
+//  KittenShopViewModel.swift
 //  KittenShop
 //
-//  Created by Andrey Antropov on 06.07.2018.
+//  Created by Andrey Antropov on 09.07.2018.
 //  Copyright © 2018 Andrey Antropov. All rights reserved.
 //
 
 import UIKit
 
-public class KittenViewModel {
-    private let kitten: Kitten
-    private let calendar: Calendar
+public class KittenShopViewModel {
     
-    public init(kitten: Kitten) {
-        self.kitten = kitten
+    //MARK: - Variables
+    private let kittens: [Kitten]
+    private let rate: Float
+    private var index: Int = 0 {
+        didSet {
+            delegate?.currentKittenChanged()
+        }
+    }
+    private let calendar: Calendar
+    public weak var delegate: KittenShopDelegate?
+    
+    public init(rate: Float) {
+        self.rate = rate
+        self.kittens = KittensDatabase.testData()
         self.calendar = Calendar(identifier: .gregorian)
     }
     
     public var name: String {
-        return kitten.name
+        return kittens[index].name
     }
     
     public var image: UIImage {
-        return kitten.image
+        return kittens[index].image
     }
     
     public var ageText: String {
         let today = calendar.startOfDay(for: Date())
-        let birthday = calendar.startOfDay(for: kitten.birthday)
+        let birthday = calendar.startOfDay(for: kittens[index].birthday)
         let components = calendar.dateComponents([.day, .month], from: birthday, to: today)
         
         var ageText = ""
@@ -54,26 +64,37 @@ public class KittenViewModel {
     }
     
     public var priceText: String {
-        switch kitten.breed {
-        case .britishShorthair:
-            return !kitten.pedigree ? "2000₽" : "4000₽"
-        case .persian:
-            return !kitten.pedigree ? "1000₽" : "3000₽"
-        case .siamese:
-            return !kitten.pedigree ? "1500₽" : "3500₽"
-        case .sphynx:
-            return !kitten.pedigree ? "5000₽" : "7500₽"
-        case .maineCoon:
-            return !kitten.pedigree ? "9999₽" : "13789₽"
+        return String(Float(kittens[index].price) * rate) + "₽"
+    }
+}
+
+extension KittenShopViewModel {
+    public func swipeLeft() {
+        if index == 0 {
+            index = kittens.count - 1
+        } else {
+            index -= 1
+        }
+    }
+    
+    public func swipeRight() {
+        if index == kittens.count - 1 {
+            index = 0
+        } else {
+            index += 1
         }
     }
 }
 
-extension KittenViewModel {
+extension KittenShopViewModel {
     public func configure(_ view: KittenView) {
         view.nameLabel.text = name
         view.imageView.image = image
         view.ageLabel.text = ageText
         view.priceLabel.text = priceText
     }
+}
+
+public protocol KittenShopDelegate: class {
+    func currentKittenChanged()
 }

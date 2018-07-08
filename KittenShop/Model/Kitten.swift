@@ -20,14 +20,14 @@ public class Kitten {
     public let name: String
     public let birthday: Date
     public let breed: Breed
-    public let pedigree: Bool
     public let image: UIImage
+    public let price: Int
     
-    public init(name: String, birthday: Date, breed: Breed, pedigree: Bool, image: UIImage) {
+    public init(name: String, birthday: Date, breed: Breed, image: UIImage, price: Int) {
         self.name = name
         self.birthday = birthday
         self.breed = breed
-        self.pedigree = pedigree
         self.image = image
+        self.price = price
     }
 }
