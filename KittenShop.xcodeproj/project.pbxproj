@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		790896CC20F2B2EC00D11BAF /* KittenShopViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790896CB20F2B2EC00D11BAF /* KittenShopViewModel.swift */; };
 		790896CE20F2B97900D11BAF /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790896CD20F2B97900D11BAF /* Box.swift */; };
+		790896D120F2CDA200D11BAF /* KittenShopViewModel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790896D020F2CDA200D11BAF /* KittenShopViewModel+Ext.swift */; };
 		793F8D2A20EF60D700AA31DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793F8D2920EF60D700AA31DC /* AppDelegate.swift */; };
 		793F8D2C20EF60D700AA31DC /* KittenShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793F8D2B20EF60D700AA31DC /* KittenShopViewController.swift */; };
 		793F8D2F20EF60D700AA31DC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 793F8D2D20EF60D700AA31DC /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 /* Begin PBXFileReference section */
 		790896CB20F2B2EC00D11BAF /* KittenShopViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KittenShopViewModel.swift; sourceTree = "<group>"; };
 		790896CD20F2B97900D11BAF /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
+		790896D020F2CDA200D11BAF /* KittenShopViewModel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KittenShopViewModel+Ext.swift"; sourceTree = "<group>"; };
 		793F8D2620EF60D700AA31DC /* KittenShop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KittenShop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		793F8D2920EF60D700AA31DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		793F8D2B20EF60D700AA31DC /* KittenShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KittenShopViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			children = (
 				793F8D2B20EF60D700AA31DC /* KittenShopViewController.swift */,
 				790896CB20F2B2EC00D11BAF /* KittenShopViewModel.swift */,
+				790896D020F2CDA200D11BAF /* KittenShopViewModel+Ext.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				793F8D2C20EF60D700AA31DC /* KittenShopViewController.swift in Sources */,
+				790896D120F2CDA200D11BAF /* KittenShopViewModel+Ext.swift in Sources */,
 				793F8D5220EF6CD100AA31DC /* KittenDatabase.swift in Sources */,
 				793F8D2A20EF60D700AA31DC /* AppDelegate.swift in Sources */,
 				793F8D5020EF6ACA00AA31DC /* KittenView.swift in Sources */,

@@ -12,37 +12,25 @@ class KittenShopViewController: UIViewController, KittenShopDelegate {
     
 
     //MARK: - Entities
-    //private var kittenViewModels: [KittenViewModel] = []
     private let kittensViewModel = KittenShopViewModel(rate: 0.5)
     
     @IBOutlet weak var kitView: KittenView!
+    @IBOutlet weak var peopleOnlineLabel: UILabel!
     
+    //MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //fetchData()
         kittensViewModel.configure(kitView)
         kittensViewModel.delegate = self
+        
+        kittensViewModel.peopleOnline.bind { [unowned self] value in
+            self.peopleOnlineLabel.text = "Buyers on-line: \(value)"
+        }
     }
     
-//    func fetchData() {
-//        for kitten in KittensDatabase.testData() {
-//            kittenViewModels.append(KittenViewModel(kitten: kitten))
-//        }
-//    }
-//
-//    @IBAction func handeSwipe() {
-//        print("swiped")
-//        if kittenViewModels.count > 1 {
-//            kittenViewModels.removeFirst()
-//            kittenViewModels.first?.configure(kitView)
-//        } else {
-//            kittenViewModels.removeAll()
-//            fetchData()
-//            kittenViewModels.first?.configure(kitView)
-//        }
-//    }
-    
+    //MARK: - Actions
     @IBAction func swiped(_ sender: UISwipeGestureRecognizer) {
         switch sender.direction {
         case .right:
@@ -57,7 +45,6 @@ class KittenShopViewController: UIViewController, KittenShopDelegate {
     
     //MARK: - Delegate methods
     func currentKittenChanged() {
-        print("kitten changed")
         kittensViewModel.configure(kitView)
     }
 }

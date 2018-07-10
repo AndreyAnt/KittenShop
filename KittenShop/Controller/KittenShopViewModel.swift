@@ -10,7 +10,8 @@ import UIKit
 
 public class KittenShopViewModel {
     
-    //MARK: - Variables
+    //MARK: - Stored Properties
+    private(set) var peopleOnline: Box<Int> = Box(1)
     private let kittens: [Kitten]
     private let rate: Float
     private var index: Int = 0 {
@@ -21,12 +22,15 @@ public class KittenShopViewModel {
     private let calendar: Calendar
     public weak var delegate: KittenShopDelegate?
     
+    //MARK: - Initializer
     public init(rate: Float) {
         self.rate = rate
         self.kittens = KittensDatabase.testData()
         self.calendar = Calendar(identifier: .gregorian)
+        monitorPeopleOnline()
     }
     
+    //MARK: - Computed properties
     public var name: String {
         return kittens[index].name
     }
@@ -64,10 +68,11 @@ public class KittenShopViewModel {
     }
     
     public var priceText: String {
-        return String(Float(kittens[index].price) * rate) + "₽"
+        return String(format: "%.0f", (Float(kittens[index].price) * (1 + rate))) + "₽"
     }
 }
 
+//MARK: - User Interaction Handling
 extension KittenShopViewModel {
     public func swipeLeft() {
         if index == 0 {
@@ -86,6 +91,7 @@ extension KittenShopViewModel {
     }
 }
 
+//MARK: - View Configuring
 extension KittenShopViewModel {
     public func configure(_ view: KittenView) {
         view.nameLabel.text = name
@@ -95,6 +101,7 @@ extension KittenShopViewModel {
     }
 }
 
+//MARK: - Delegate Protocol
 public protocol KittenShopDelegate: class {
     func currentKittenChanged()
 }
