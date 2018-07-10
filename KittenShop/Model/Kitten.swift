@@ -13,7 +13,7 @@ public class Kitten {
         case persian
         case siamese
         case britishShorthair
-        case maineCoon
+        case unknown
         case sphynx
     }
     
